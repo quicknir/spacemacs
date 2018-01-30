@@ -12,15 +12,6 @@
 
 ;; clang
 
-(defun spacemacs/clang-format-function (&optional style)
-  "Format the current function with clang-format according to STYLE."
-  (interactive)
-  (save-excursion
-    (c-mark-function)
-    (clang-format (region-beginning) (region-end) style)
-    (deactivate-mark) ; If the function is already formatted, then remove the mark
-    (message "Formatted function %s" (c-defun-name))))
-
 (defun spacemacs/clang-format-region-or-buffer (&optional style)
   "Format the current region or buffer with clang-format according to STYLE."
   (interactive)
