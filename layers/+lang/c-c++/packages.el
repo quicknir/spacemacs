@@ -78,15 +78,7 @@
 
 (defun c-c++/post-init-company ()
   (when (configuration-layer/package-used-p 'cmake-mode)
-    (spacemacs|add-company-backends :backends company-cmake :modes cmake-mode))
-  (when c-c++-enable-clang-support
-    (spacemacs|add-company-backends :backends company-clang
-      :modes c-mode-common)
-    (when c-c++-enable-c++11
-      (setq company-clang-arguments '("-std=c++11")))
-    (setq company-clang-prefix-guesser 'spacemacs/company-more-than-prefix-guesser)
-    (spacemacs/add-to-hooks 'spacemacs/c-c++-load-clang-args c-c++-mode-hooks)))
-
+    (spacemacs|add-company-backends :backends company-cmake :modes cmake-mode)))
 
 (defun c-c++/init-company-rtags ()
   (use-package company-rtags
