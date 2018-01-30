@@ -15,7 +15,6 @@
     disaster
     clang-format
     company
-    (company-c-headers :requires company)
     (company-rtags :requires company rtags)
     company-ycmd
     flycheck
@@ -23,7 +22,6 @@
     gdb-mi
     ggtags
     counsel-gtags
-    google-c-style
     helm-cscope
     helm-gtags
     (helm-rtags :requires helm rtags)
@@ -31,7 +29,6 @@
     rtags
     realgud
     semantic
-    srefactor
     stickyfunc-enhance
     ycmd
     xcscope
@@ -90,12 +87,6 @@
     (setq company-clang-prefix-guesser 'spacemacs/company-more-than-prefix-guesser)
     (spacemacs/add-to-hooks 'spacemacs/c-c++-load-clang-args c-c++-mode-hooks)))
 
-(defun c-c++/init-company-c-headers ()
-  (use-package company-c-headers
-    :defer t
-    :init (spacemacs|add-company-backends
-            :backends company-c-headers
-            :modes c-mode-common)))
 
 (defun c-c++/init-company-rtags ()
   (use-package company-rtags
@@ -230,20 +221,8 @@
         "q" 'realgud:cmd-quit
         "S" 'realgud-window-cmd-undisturb-src))))
 
-(defun c-c++/init-google-c-style ()
-  (use-package google-c-style
-    :if (or 'c-c++-enable-google-style 'c-c++-enable-google-newline)
-    :config (progn
-    (when c-c++-enable-google-style (add-hook 'c-mode-common-hook 'google-set-c-style))
-    (when c-c++-enable-google-newline (add-hook 'c-mode-common-hook 'google-make-newline-indent)))))
-
 (defun c-c++/post-init-semantic ()
   (spacemacs/add-to-hooks 'semantic-mode c-c++-mode-hooks))
-
-(defun c-c++/post-init-srefactor ()
-  (dolist (mode c-c++-modes)
-    (spacemacs/set-leader-keys-for-major-mode mode "r" 'srefactor-refactor-at-point))
-  (spacemacs/add-to-hooks 'spacemacs/load-srefactor c-c++-mode-hooks))
 
 (defun c-c++/post-init-stickyfunc-enhance ()
   (spacemacs/add-to-hooks 'spacemacs/load-stickyfunc-enhance c-c++-mode-hooks))
