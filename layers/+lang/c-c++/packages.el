@@ -65,7 +65,6 @@
 
 (defun c-c++/init-clang-format ()
   (use-package clang-format
-    :if c-c++-enable-clang-support
     :init
     (progn
       (spacemacs/add-to-hooks 'spacemacs/clang-format-on-save c-c++-mode-hooks)
@@ -90,11 +89,7 @@
 
 (defun c-c++/post-init-flycheck ()
   (dolist (mode c-c++-modes)
-    (spacemacs/enable-flycheck mode))
-  (when c-c++-enable-clang-support
-    (spacemacs/add-to-hooks 'spacemacs/c-c++-load-clang-args c-c++-mode-hooks)
-    (when c-c++-enable-c++11
-      (setq flycheck-clang-language-standard "c++11"))))
+    (spacemacs/enable-flycheck mode)))
 
 ;; TODO lazy load this package
 (defun c-c++/init-flycheck-rtags ()
